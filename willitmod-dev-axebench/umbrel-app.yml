@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-axebench
 category: bitcoin
 name: AxeBench (Dev)
-version: "3.0.11"
+version: "3.0.12"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
 description: >-
@@ -29,5 +29,5 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v3.0.11: Avalon Q: use cgminer `estats` (when available) to pull real telemetry like ASIC temp, board/VR temp fallback, fan, and power. Fixes the “0.0C / fan -” issue on some firmwares.
+  v3.0.12: Avalon Q: report hardware error rate from cgminer MM telemetry (DH/DHspd) when summary reports 0%.
 submitter: WillItMod
