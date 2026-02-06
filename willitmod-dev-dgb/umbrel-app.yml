@@ -5,6 +5,10 @@ name: AxeDGB
 version: "0.9.156-dev"
 tagline: DGB node + solo pool
 description: >-
+  THESE APPS ARE IN DEVELOPMENT. THEY MAY WORK, THEY MAY NOT. THESE ARE FOR TESTING ONLY.
+  If you want to support development, then use these apps and provide HELPFUL feedback.
+  If you want a working known good app, then DO NOT USE DEV APPS.
+
   Run a DigiByte full node (DigiByte Core) and an integrated solo Stratum v1 pool (Miningcore) as a single app.
 
 

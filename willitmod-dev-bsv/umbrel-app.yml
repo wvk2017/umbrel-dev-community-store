@@ -5,6 +5,10 @@ name: AxeBSV
 version: "0.7.176-dev"
 tagline: BSV node + solo pool
 description: >-
+  THESE APPS ARE IN DEVELOPMENT. THEY MAY WORK, THEY MAY NOT. THESE ARE FOR TESTING ONLY.
+  If you want to support development, then use these apps and provide HELPFUL feedback.
+  If you want a working known good app, then DO NOT USE DEV APPS.
+
   IMPORTANT: AMD64/x86_64 only. ARM/arm64 (Raspberry Pi) is not supported because the BSV node image (bitcoinsv/bitcoin-sv:1.2.0) is amd64-only.
 
   Run a Bitcoin SV full node and a solo Stratum v1 pool (ckpool) as a single app.

@@ -5,6 +5,10 @@ name: AxeXEC
 version: "0.1.3-dev"
 tagline: XEC node + solo pool
 description: >-
+  THESE APPS ARE IN DEVELOPMENT. THEY MAY WORK, THEY MAY NOT. THESE ARE FOR TESTING ONLY.
+  If you want to support development, then use these apps and provide HELPFUL feedback.
+  If you want a working known good app, then DO NOT USE DEV APPS.
+
   Run an eCash (XEC) full node and an integrated solo Stratum v1 pool (ckpool) as a single app.
 
 

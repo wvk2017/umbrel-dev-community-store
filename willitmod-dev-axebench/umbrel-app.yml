@@ -6,6 +6,10 @@ version: "0.3.15"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
 description: >-
+  THESE APPS ARE IN DEVELOPMENT. THEY MAY WORK, THEY MAY NOT. THESE ARE FOR TESTING ONLY.
+  If you want to support development, then use these apps and provide HELPFUL feedback.
+  If you want a working known good app, then DO NOT USE DEV APPS.
+
   AxeBench is a web UI for managing and benchmarking supported miners, with fleet-level views,
   profiles, and automation.
 

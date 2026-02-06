@@ -6,6 +6,10 @@ version: "1.3-dev.1"
 tagline: Real-time miner monitoring and thermal control
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axelive/icon.png
 description: >-
+  THESE APPS ARE IN DEVELOPMENT. THEY MAY WORK, THEY MAY NOT. THESE ARE FOR TESTING ONLY.
+  If you want to support development, then use these apps and provide HELPFUL feedback.
+  If you want a working known good app, then DO NOT USE DEV APPS.
+
   AxeLive is a web UI and controller for supported miners, focused on safe thermal governance,
   stable fan control, and fleet management.
 developer: WillItMod
