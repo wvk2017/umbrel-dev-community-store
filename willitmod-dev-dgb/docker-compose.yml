@@ -795,7 +795,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.149-dev
+    image: ghcr.io/willitmod/axedgb-app:0.9.150-dev
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -818,6 +818,11 @@ services:
       DGB_RPC_USER: "dgb"
       DGB_RPC_PASS: "${APP_PASSWORD}"
       NETWORK_IP: "${NETWORK_IP}"
+      PGHOST: "postgres"
+      PGPORT: "5432"
+      PGDATABASE: "miningcore"
+      PGUSER: "miningcore"
+      PGPASSWORD: "${APP_PASSWORD}"
       MININGCORE_API_URL: "http://miningcore:4000"
       MININGCORE_POOL_ID: "dgb-sha256-1"
       MININGCORE_POOL_IDS: "sha256:dgb-sha256-1,scrypt:dgb-scrypt-1"
