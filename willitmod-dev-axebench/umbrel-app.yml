@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-axebench
 category: bitcoin
 name: AxeBench (Dev)
-version: "0.3.14"
+version: "0.3.15"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
 description: >-
@@ -29,5 +29,5 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v0.3.14: Store version aligned to 5tratumOS/Umbrel release versioning. AxeBench image remains `v3.0.13`.
+  v0.3.15: Raise Avalon Q / Nano3s high-temp warning thresholds (Canaan devices can run up to ~90C).
 submitter: WillItMod
