@@ -188,7 +188,7 @@ services:
       start_period: 2m
 
   ckpool:
-    image: ghcr.io/getumbrel/docker-ckpool-solo:590fb2a
+    image: ghcr.io/willitmod/ecash-ckpool-solo:18b38ad
     entrypoint: ["/bin/sh"]
     command:
       - -ec
@@ -199,11 +199,11 @@ services:
         # recreated via an app restart. Remove stale pid files on boot to self-heal.
         rm -f /tmp/ckpool/*.pid 2>/dev/null || true
         if command -v ckpool >/dev/null 2>&1; then
-          exec ckpool -k -B -L -c /config/ckpool.conf
+          exec ckpool -k -x -L -c /config/ckpool.conf
         elif [ -x /bin/ckpool ]; then
-          exec /bin/ckpool -k -B -L -c /config/ckpool.conf
+          exec /bin/ckpool -k -x -L -c /config/ckpool.conf
         elif [ -x /usr/bin/ckpool ]; then
-          exec /usr/bin/ckpool -k -B -L -c /config/ckpool.conf
+          exec /usr/bin/ckpool -k -x -L -c /config/ckpool.conf
         else
           echo "ckpool binary not found in image"
           exit 1
@@ -220,7 +220,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/www:/www
 
   app:
-    image: ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.4
+    image: ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.6
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -246,7 +246,7 @@ services:
       APP_CHANNEL: "DEV"
       APP_VERSION_SUFFIX: "-dev"
       XECD_IMAGE: "Bitcoin ABC v0.32.7 (local build)"
-      CKPOOL_IMAGE: "ghcr.io/getumbrel/docker-ckpool-solo:590fb2a"
+      CKPOOL_IMAGE: "ghcr.io/willitmod/ecash-ckpool-solo:18b38ad"
       STATIC_DIR: "/app/static"
 
 networks:

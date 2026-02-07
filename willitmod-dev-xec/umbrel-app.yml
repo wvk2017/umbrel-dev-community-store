@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-xec
 category: bitcoin
 name: AxeXEC
-version: "0.1.4-dev"
+version: "0.1.6-dev"
 tagline: XEC node + solo pool
 description: >-
   THESE APPS ARE IN DEVELOPMENT. THEY MAY WORK, THEY MAY NOT. THESE ARE FOR TESTING ONLY.
@@ -14,7 +14,7 @@ description: >-
 
   Features:
     - Axe-style dashboard for node sync and pool stats
-    - CashAddr to legacy payout address conversion for ckpool compatibility
+    - Supports legacy and CashAddr payout addresses
     - Difficulty presets (vardiff) tuned for home miners
     - Blocks view for solved blocks, plus optional history scan
     - Community support via Discord
@@ -29,17 +29,14 @@ description: >-
 
 
   Notes:
-    - For maximum compatibility, use a legacy Base58 address (`1...` / `3...`) as the payout address.
-    - Many wallets show CashAddr (`ecash:q...` / `ecash:p...`). AxeXEC automatically converts CashAddr to legacy format for ckpool compatibility and shows the converted address.
-    - Conversion happens locally on your device; AxeXEC does not send your address to any external service.
-    - Reference converter (CashAddr <-> legacy): https://bch.info/en/tools/cashaddr
+    - Payout address supports both legacy Base58 (`1...` / `3...`) and CashAddr (`ecash:q...` / `ecash:p...`).
     - Solo mining is extremely unlikely to find blocks without significant hashrate.
     - First sync can be slow on small or busy systems. SSD strongly recommended.
 
 
   Components:
     - Bitcoin ABC (eCash) full node (MIT): https://github.com/Bitcoin-ABC/bitcoin-abc
-    - ckpool (GPLv3) solo pool engine: https://github.com/ctubio/ckpool
+    - ecash-ckpool-solo (GPLv3) solo pool engine: https://github.com/WillItMod/ecash-ckpool-solo
 
 
   Status:

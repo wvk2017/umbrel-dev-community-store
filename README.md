@@ -36,7 +36,7 @@ For maximum compatibility with ckpool/miners, use a legacy BCH Base58 address (`
 **XEC**
 Many wallets show eCash addresses in CashAddr format (`ecash:q...` / `ecash:p...`).
 
-For maximum compatibility with ckpool/miners, use a legacy Base58 address (`1...` / `3...`) as the payout address. AxeXEC converts CashAddr to legacy for ckpool compatibility.
+Payout address supports both legacy Base58 (`1...` / `3...`) and CashAddr (`ecash:q...` / `ecash:p...`).
 
 **DGB**
 Use a DigiByte address (typically Base58 `D...` / `S...` or Bech32 `dgb1...`).
@@ -44,7 +44,7 @@ Use a DigiByte address (typically Base58 `D...` / `S...` or Bech32 `dgb1...`).
 ## Security / provenance
 
 - BCHN runs from Docker Hub image `mainnet/bitcoin-cash-node` (pinned by version tag in `docker-compose.yml`).
-- ckpool runs from `ghcr.io/getumbrel/docker-ckpool-solo` (pinned by version tag in `docker-compose.yml`).
+- ckpool (XEC) runs from `ghcr.io/willitmod/ecash-ckpool-solo` (pinned by tag in `docker-compose.yml`).
 - BTC node selector runs from `ghcr.io/willitmod/axebtc-bitcoind-switch` (pinned by version tag in `docker-compose.yml`).
 - BC2 node runs from `ghcr.io/willitmod/bitcoinii-core` (pinned by version tag in `docker-compose.yml`).
 - XEC node is built locally from official Bitcoin ABC release tarballs (pinned by version in `data/xecd/Dockerfile`).
