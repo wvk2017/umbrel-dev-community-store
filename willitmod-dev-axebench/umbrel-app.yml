@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-axebench
 category: bitcoin
 name: AxeBench (Dev)
-version: "0.3.16"
+version: "0.3.17"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
 description: >-
@@ -33,5 +33,5 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v0.3.16: Avalon Q now has stock LOW/MED/HIGH profiles like Nano3s; also relaxes HIGH_TEMP warnings for Canaan devices.
+  v0.3.17: Make AxeBench UI subpath-aware so it works behind 5tratumOS NGINX at /apps/axebench/ (router base + relative assets + API prefixing).
 submitter: WillItMod
