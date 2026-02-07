@@ -2,12 +2,17 @@ manifestVersion: 1
 id: willitmod-dev-xec
 category: bitcoin
 name: AxeXEC
-version: "0.1.6-dev"
+version: "0.1.7-dev"
 tagline: XEC node + solo pool
 description: >-
   THESE APPS ARE IN DEVELOPMENT. THEY MAY WORK, THEY MAY NOT. THESE ARE FOR TESTING ONLY.
   If you want to support development, then use these apps and provide HELPFUL feedback.
   If you want a working known good app, then DO NOT USE DEV APPS.
+
+  **IMPORTANT (XEC MINING RULES):** eCash enforces mandatory coinbase deductions (Miner Fund + staking rewards).
+  This is NOT set by AxeXEC / WillItMod and is not configurable or removable by the app.
+  Blocks without the required outputs would be invalid.
+  Current policy (subject to change by protocol): 32% Miner Fund + 10% stakers = 42% total deductions.
 
   Run an eCash (XEC) full node and an integrated solo Stratum v1 pool (ckpool) as a single app.
 
