@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-axelive
 category: bitcoin
 name: AxeLive (Dev)
-version: "1.3-dev.2"
+version: "1.4-dev"
 tagline: Real-time miner monitoring and thermal control
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axelive/icon.png
 description: >-
@@ -25,5 +25,5 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v1.3-dev.2: Add firmware-compatible ASIC error metric fallback for NerdQAxe++/NerdOctAxe (errorPercentage -> asicErrors/duplicateHWNonces-derived).
+  v1.4-dev: Firmware compatibility update for NerdQAxe++/NerdOctAxe ASIC error metrics.
 submitter: WillItMod
