@@ -606,18 +606,18 @@ services:
         fi
 
         # Write a small, UI-readable report for troubleshooting.
-	        if command -v jq >/dev/null 2>&1; then
-	          jq -n \
-	            --arg ts "$$(date -Is 2>/dev/null || date)" \
-	            --arg repaired "$$mc_repaired" \
-	            --arg applied "$$applied_settings" \
-	            --arg desired "$$desired_addr" \
-	            --arg addr "$$applied_addr" \
-	            --arg locked "$$stratum_locked" \
-	            '{t:$$ts,miningcoreRepaired:($$repaired=="1"),settingsApplied:($$applied=="1"),desiredPayout:$$desired,appliedPayout:$$addr,stratumLocked:($$locked=="1")}' \
-	            > "$$boot_repair" 2>/dev/null || true
-	          chown 1000:1000 "$$boot_repair" 2>/dev/null || true
-	        fi
+        if command -v jq >/dev/null 2>&1; then
+          jq -n \
+            --arg ts "$$(date -Is 2>/dev/null || date)" \
+            --arg repaired "$$mc_repaired" \
+            --arg applied "$$applied_settings" \
+            --arg desired "$$desired_addr" \
+            --arg addr "$$applied_addr" \
+            --arg locked "$$stratum_locked" \
+            '{t:$$ts,miningcoreRepaired:($$repaired=="1"),settingsApplied:($$applied=="1"),desiredPayout:$$desired,appliedPayout:$$addr,stratumLocked:($$locked=="1")}' \
+            > "$$boot_repair" 2>/dev/null || true
+          chown 1000:1000 "$$boot_repair" 2>/dev/null || true
+        fi
 
         # Ensure Miningcore has a coins.json available at runtime.
         # Our Miningcore container expects this file next to the binary; without it, the API can crash on startup.
