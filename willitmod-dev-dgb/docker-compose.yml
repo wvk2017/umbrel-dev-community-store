@@ -442,24 +442,24 @@ services:
               if ! echo "$$desired_startdiff" | grep -qE '^[0-9]+(\\.[0-9]+)?$$'; then desired_startdiff=""; fi
               if ! echo "$$desired_maxdiff" | grep -qE '^[0-9]+(\\.[0-9]+)?$$'; then desired_maxdiff=""; fi
 
-	              # Only accept legacy/base58 payout addresses here. Bech32 (dgb1...) will be rejected by Miningcore.
-	              if echo "$$desired_addr" | grep -qE '^[DS][1-9A-HJ-NP-Za-km-z]{25,60}$$'; then
-	                echo "[axedgb] Applying payout address + varDiff settings from $$settings"
-	                mindiff_arg="0"
-	                startdiff_arg="0"
-	                maxdiff_arg="0"
-	                if [ -n "$$desired_mindiff" ]; then mindiff_arg="$$desired_mindiff"; fi
-	                if [ -n "$$desired_startdiff" ]; then startdiff_arg="$$desired_startdiff"; fi
-	                if [ -n "$$desired_maxdiff" ]; then maxdiff_arg="$$desired_maxdiff"; fi
-	                tmp_apply="/data/pool/config/miningcore.json.tmp_apply"
-	                jq --arg addr "$$desired_addr" \
-	                   --argjson mindiff "$$mindiff_arg" \
-	                   --argjson startdiff "$$startdiff_arg" \
-	                   --argjson maxdiff "$$maxdiff_arg" \
-	                   '
-	                   .[0]
-	                   |
-	                   def apply_port(p):
+                # Only accept legacy/base58 payout addresses here. Bech32 (dgb1...) will be rejected by Miningcore.
+                if echo "$$desired_addr" | grep -qE '^[DS][1-9A-HJ-NP-Za-km-z]{25,60}$$'; then
+                  echo "[axedgb] Applying payout address + varDiff settings from $$settings"
+                  mindiff_arg="0"
+                  startdiff_arg="0"
+                  maxdiff_arg="0"
+                  if [ -n "$$desired_mindiff" ]; then mindiff_arg="$$desired_mindiff"; fi
+                  if [ -n "$$desired_startdiff" ]; then startdiff_arg="$$desired_startdiff"; fi
+                  if [ -n "$$desired_maxdiff" ]; then maxdiff_arg="$$desired_maxdiff"; fi
+                  tmp_apply="/data/pool/config/miningcore.json.tmp_apply"
+                  jq --arg addr "$$desired_addr" \
+                     --argjson mindiff "$$mindiff_arg" \
+                     --argjson startdiff "$$startdiff_arg" \
+                     --argjson maxdiff "$$maxdiff_arg" \
+                     '
+                     .[0]
+                     |
+                     def apply_port(p):
                      p
                      | .listenAddress = "0.0.0.0"
                      | (if ($$startdiff > 0) then .difficulty = $$startdiff else . end)
@@ -530,23 +530,23 @@ services:
             if ! echo "$$desired_startdiff" | grep -qE '^[0-9]+(\\.[0-9]+)?$$'; then desired_startdiff=""; fi
             if ! echo "$$desired_maxdiff" | grep -qE '^[0-9]+(\\.[0-9]+)?$$'; then desired_maxdiff=""; fi
 
-	            if echo "$$desired_addr" | grep -qE '^[DS][1-9A-HJ-NP-Za-km-z]{25,60}$$'; then
-	              echo "[axedgb] Applying payout address + varDiff settings from $$settings (post-repair pass)"
-	              mindiff_arg="0"
-	              startdiff_arg="0"
-	              maxdiff_arg="0"
-	              if [ -n "$$desired_mindiff" ]; then mindiff_arg="$$desired_mindiff"; fi
-	              if [ -n "$$desired_startdiff" ]; then startdiff_arg="$$desired_startdiff"; fi
-	              if [ -n "$$desired_maxdiff" ]; then maxdiff_arg="$$desired_maxdiff"; fi
-	              tmp_apply="/data/pool/config/miningcore.json.tmp_apply2"
-	              jq --arg addr "$$desired_addr" \
-	                 --argjson mindiff "$$mindiff_arg" \
-	                 --argjson startdiff "$$startdiff_arg" \
-	                 --argjson maxdiff "$$maxdiff_arg" \
-	                 '
-	                 .[0]
-	                 |
-	                 def apply_port(p):
+              if echo "$$desired_addr" | grep -qE '^[DS][1-9A-HJ-NP-Za-km-z]{25,60}$$'; then
+                echo "[axedgb] Applying payout address + varDiff settings from $$settings (post-repair pass)"
+                mindiff_arg="0"
+                startdiff_arg="0"
+                maxdiff_arg="0"
+                if [ -n "$$desired_mindiff" ]; then mindiff_arg="$$desired_mindiff"; fi
+                if [ -n "$$desired_startdiff" ]; then startdiff_arg="$$desired_startdiff"; fi
+                if [ -n "$$desired_maxdiff" ]; then maxdiff_arg="$$desired_maxdiff"; fi
+                tmp_apply="/data/pool/config/miningcore.json.tmp_apply2"
+                jq --arg addr "$$desired_addr" \
+                   --argjson mindiff "$$mindiff_arg" \
+                   --argjson startdiff "$$startdiff_arg" \
+                   --argjson maxdiff "$$maxdiff_arg" \
+                   '
+                   .[0]
+                   |
+                   def apply_port(p):
                    p
                    | .listenAddress = "0.0.0.0"
                    | (if ($$startdiff > 0) then .difficulty = $$startdiff else . end)
