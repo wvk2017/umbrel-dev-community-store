@@ -457,11 +457,9 @@ services:
                      p
                      | .listenAddress = "0.0.0.0"
                      | (if ($$startdiff > 0) then .difficulty = $$startdiff else . end)
+                     | (.varDiff |= (if type=="object" then . else {} end))
                      | (if ($$mindiff > 0) then .varDiff.minDiff = $$mindiff else . end)
-                     | (if ($$maxdiff > 0) then .varDiff.maxDiff = $$maxdiff else .varDiff.maxDiff = null end)
-                     | (.varDiff.targetTime = 15)
-                     | (.varDiff.retargetTime = 120)
-                     | (.varDiff.variancePercent = 50);
+                     | (if ($$maxdiff > 0) then .varDiff.maxDiff = $$maxdiff else .varDiff.maxDiff = null end);
 
                    (.pools |= (if type=="array" then map(
                      if (.id=="dgb-sha256-1") then
@@ -470,7 +468,8 @@ services:
                        | (.ports |= (if type=="object" then with_entries(.value |= (if type=="object" then apply_port(.) else . end)) else . end))
                      elif (.id=="dgb-scrypt-1") then
                        (.enabled = true)
-                     | (.address = $$addr)
+                       | (.address = $$addr)
+                       | (.ports |= (if type=="object" then with_entries(.value |= (if type=="object" then apply_port(.) else . end)) else . end))
                    else . end
                  ) else . end))
                    ' -s /data/pool/config/miningcore.json > "$$tmp_apply" && mv "$$tmp_apply" /data/pool/config/miningcore.json
@@ -539,11 +538,9 @@ services:
                    p
                    | .listenAddress = "0.0.0.0"
                    | (if ($$startdiff > 0) then .difficulty = $$startdiff else . end)
+                   | (.varDiff |= (if type=="object" then . else {} end))
                    | (if ($$mindiff > 0) then .varDiff.minDiff = $$mindiff else . end)
-                   | (if ($$maxdiff > 0) then .varDiff.maxDiff = $$maxdiff else .varDiff.maxDiff = null end)
-                   | (.varDiff.targetTime = 15)
-                   | (.varDiff.retargetTime = 120)
-                   | (.varDiff.variancePercent = 50);
+                   | (if ($$maxdiff > 0) then .varDiff.maxDiff = $$maxdiff else .varDiff.maxDiff = null end);
 
                  (.pools |= (if type=="array" then map(
                    if (.id=="dgb-sha256-1") then
@@ -553,6 +550,7 @@ services:
                    elif (.id=="dgb-scrypt-1") then
                      (.enabled = true)
                      | (.address = $$addr)
+                     | (.ports |= (if type=="object" then with_entries(.value |= (if type=="object" then apply_port(.) else . end)) else . end))
                    else . end
                    ) else . end))
                  ' -s "$$miningcore_conf" > "$$tmp_apply" && mv "$$tmp_apply" "$$miningcore_conf"
@@ -830,7 +828,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.162-dev
+    image: ghcr.io/willitmod/axedgb-app:0.9.163-dev
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
