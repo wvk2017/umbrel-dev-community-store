@@ -1,0 +1,122 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: powpow-app
+      APP_PORT: 3000
+      JWT_SECRET: "${JWT_SECRET}"
+    networks:
+      - umbrel_main_network
+
+  init_permissions:
+    image: alpine:3.22.1
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    command:
+      - /bin/sh
+      - -ec
+      - |-
+        set -eu
+        mkdir -p /data/ui/state /data/litecoin /data/dogecoin /data/pool/config /data/postgres
+        chown -R 1000:1000 /data/ui /data/litecoin /data/dogecoin /data/pool /data/pool/config || true
+        chown -R 70:70 /data/postgres || true
+        chmod 700 /data/postgres || true
+
+  app:
+    image: ghcr.io/willitmod/powpow-app:0.2.0-dev
+    user: "1000:1000"
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      litecoin:
+        condition: service_started
+      dogecoin:
+        condition: service_started
+      pool:
+        condition: service_started
+    networks:
+      default:
+        aliases:
+          - powpow-app
+      umbrel_main_network:
+        aliases:
+          - powpow-app
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      APP_CHANNEL: "DEV"
+      APP_VERSION: "0.2.0-dev"
+      NETWORK_HOST_HINT: "10.10.10.235"
+      POOL_API_URL: "http://pool:8001"
+      POSTGRES_PASSWORD: "${APP_PASSWORD}"
+
+  litecoin:
+    image: ghcr.io/willitmod/powpow-litecoin:0.2.0-dev
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/litecoin/bin/litecoin-cli -datadir=/data/litecoin getblockchaininfo >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 2m
+
+  dogecoin:
+    image: ghcr.io/willitmod/powpow-dogecoin:0.2.0-dev
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/dogecoin/bin/dogecoin-cli -datadir=/data/dogecoin getblockchaininfo >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 2m
+
+  pool:
+    image: ghcr.io/willitmod/powpow-pool:0.2.0-dev
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_started
+      litecoin:
+        condition: service_started
+      dogecoin:
+        condition: service_started
+    environment:
+      WAIT_FOR_FULL_SYNC: "1"
+    ports:
+      - "9555:9555/tcp"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_USER: "mergedmining"
+      POSTGRES_PASSWORD: "${APP_PASSWORD}"
+      POSTGRES_DB: "mergedmining"
+    volumes:
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+
+networks:
+  umbrel_main_network:
+    external: true
+    name: umbrel_main_network
