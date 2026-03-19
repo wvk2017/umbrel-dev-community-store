@@ -2,7 +2,7 @@
 id: willitmod-dev-axebench
 category: bitcoin
 name: AxeBench (Dev)
-version: "4.0.19"
+version: "4.0.20"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
 description: >-
@@ -33,6 +33,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v4.0.19:
-    - Fix Nano3s add flow: send fixed PSU voltage/amperage automatically (no user input required).
+  v4.0.20:
+    - Remove Patreon and device-limit restrictions while keeping licensing telemetry ping.
+    - Fix dashboard current-pool display to use the live AxePool source.
+    - Harden Avalon Q pool switching so success requires the new pool order to take effect.
 submitter: WillItMod
