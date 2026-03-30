@@ -21,6 +21,7 @@ services:
         set -eu
         mkdir -p /data/ui/state /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
         chown -R 1000:1000 /data/ui /data/node /data/pool || true
+        chmod -R ug+rwX /data/ui /data/node /data/pool || true
 
   app:
     image: ghcr.io/willitmod/axebch2-app:0.1.9-dev
@@ -30,9 +31,9 @@ services:
       init_permissions:
         condition: service_completed_successfully
       bch2:
-        condition: service_started
+        condition: service_healthy
       ckpool:
-        condition: service_started
+        condition: service_healthy
     networks:
       default:
         aliases:
@@ -98,7 +99,7 @@ services:
       init_permissions:
         condition: service_completed_successfully
       bch2:
-        condition: service_started
+        condition: service_healthy
     environment:
       BCH2_RPC_HOST: "bch2"
       BCH2_RPC_PORT: "8342"
@@ -109,11 +110,20 @@ services:
       MINDIFF: "1"
       STARTDIFF: "16"
       MAXDIFF: "0"
+    user: "1000:1000"
     command: ["-L", "-c", "/data/pool/config/ckpool.conf"]
     ports:
       - "9265:3333/tcp"
     volumes:
       - ${APP_DATA_DIR}/data/pool:/data/pool
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'pid=$$(cat /tmp/ckpool/main.pid 2>/dev/null || true); [ -n "$$pid" ] && kill -0 "$$pid" 2>/dev/null'
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 45s
 
 networks:
   umbrel_main_network:
