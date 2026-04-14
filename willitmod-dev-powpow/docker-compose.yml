@@ -25,7 +25,7 @@ services:
         chmod 700 /data/postgres || true
 
   app:
-    image: ghcr.io/willitmod/powpow-app:0.2.15-dev
+    image: ghcr.io/willitmod/powpow-app:0.2.16-dev
     user: "1000:1000"
     restart: unless-stopped
     depends_on:
