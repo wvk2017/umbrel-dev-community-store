@@ -8,7 +8,7 @@
     }
   ],
   "btcaddress": "${PAYOUT_ADDRESS}",
-  "btcsig": "/mined by WillItMod on 5tratumOS/",
+  "btcsig": "/mined by wvk2017 NL88 on Umbrel AxeXEC/",
   "mindiff": 1,
   "startdiff": 16,
   "maxdiff": 0,
