@@ -8,7 +8,7 @@
     }
   ],
   "btcaddress": "${PAYOUT_ADDRESS}",
-  "btcsig": "/AxeBTC/",
+  "btcsig": "/mined by wvk2017 NL88 on Umbrel AxeBTC/",
   "mindiff": 128,
   "startdiff": 512,
   "maxdiff": 131072,
