@@ -8,7 +8,7 @@
     }
   ],
   "btcaddress": "${PAYOUT_ADDRESS}",
-  "btcsig": "/AxeBC2/",
+  "btcsig": "/mined by wvk2017 NL88 on Umbrel AxeBC2/",
   "mindiff": 1,
   "startdiff": 1,
   "maxdiff": 0,
